@@ -36,6 +36,19 @@ const playRound = (() => {
   const oMoves = [];
   let moveCount = 0;
   let playerTurn = 'x';
+  // indicates current player's turn
+  const displayTurnX = document.getElementById('playerX');
+  const displayTurnO = document.getElementById('playerO');
+
+  function displayTurn() {
+    if (playerTurn === 'x') {
+      displayTurnX.classList.add('highlighted');
+      displayTurnO.classList.remove('highlighted');
+    } else {
+      displayTurnO.classList.add('highlighted');
+      displayTurnX.classList.remove('highlighted');
+    }
+  }
 
   function checkWin() {
     winningCombos.forEach((array) => {
@@ -62,6 +75,7 @@ const playRound = (() => {
     }
     moveCount += 1;
     checkWin();
+    displayTurn();
   }
 
   return { placeMove };
