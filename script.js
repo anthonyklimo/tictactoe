@@ -14,20 +14,22 @@ const makeGameBoard = (() => {
       gameBoard.appendChild(newBox);
     }
   }
-  newBoard();
 
-  return { newBoard };
+  function clearBoard() {
+    gameBoard.innerHTML = '';
+  }
+
+  return { newBoard, clearBoard };
 })();
 
 const playRound = (() => {
-  // arrays containing winning combinations
   const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
     [0, 3, 6],
     [1, 4, 7],
-    [2, 5, 9],
+    [2, 5, 8],
     [1, 4, 8],
     [2, 4, 6],
   ];
@@ -39,6 +41,7 @@ const playRound = (() => {
   // indicates current player's turn
   const displayTurnX = document.getElementById('playerX');
   const displayTurnO = document.getElementById('playerO');
+  const restartButton = document.getElementById('restart');
 
   function displayTurn() {
     if (playerTurn === 'x') {
@@ -55,7 +58,7 @@ const playRound = (() => {
       if (array.every((element) => xMoves.includes(element))) {
         console.log('x wins');
       } else if (array.every((element) => oMoves.includes(element))) {
-        console.log('x wins');
+        console.log('o wins');
       } else if (moveCount === 9) {
         console.log('draw');
       }
@@ -67,10 +70,12 @@ const playRound = (() => {
     if (playerTurn === 'x') {
       e.target.innerHTML = 'X';
       xMoves.push(parseInt(moveIndex));
-      playerTurn = '0';
+      console.log(xMoves);
+      playerTurn = 'o';
     } else {
       e.target.innerHTML = 'O';
       oMoves.push(parseInt(moveIndex));
+      console.log(oMoves);
       playerTurn = 'x';
     }
     moveCount += 1;
@@ -78,5 +83,16 @@ const playRound = (() => {
     displayTurn();
   }
 
+  function restart() {
+    xMoves.length = 0;
+    oMoves.length = 0;
+    moveCount = 0;
+    makeGameBoard.clearBoard();
+    makeGameBoard.newBoard();
+  }
+  restartButton.addEventListener('click', restart);
+
   return { placeMove };
 })();
+
+makeGameBoard.newBoard();
