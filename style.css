@@ -80,9 +80,11 @@ html {
     font-size: 48px;
     background-color: rgb(231, 242, 249);
     border: #BEE9E8 2px solid;
+
+    cursor: pointer;
 }
 
-#restart {
+#button {
     margin: 20px;
     padding: 5px 10px;
 
@@ -93,6 +95,16 @@ html {
     border: none;
     border-radius: 5px;
 }
+
+#button:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+#button:active {
+    scale: 1;
+}
+
 #gameBoard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
