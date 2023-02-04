@@ -30,7 +30,7 @@ const playRound = (() => {
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    [1, 4, 8],
+    [0, 4, 8],
     [2, 4, 6],
   ];
   // tracks player's moves
@@ -42,6 +42,7 @@ const playRound = (() => {
   const displayTurnX = document.getElementById('playerX');
   const displayTurnO = document.getElementById('playerO');
   const restartButton = document.getElementById('restart');
+  const popUp = document.getElementById('pop-up');
 
   function displayTurn() {
     if (playerTurn === 'x') {
@@ -56,11 +57,14 @@ const playRound = (() => {
   function checkWin() {
     winningCombos.forEach((array) => {
       if (array.every((element) => xMoves.includes(element))) {
-        console.log('x wins');
+        popUp.innerHTML = 'x wins';
+        popUp.classList.remove('hidden');
       } else if (array.every((element) => oMoves.includes(element))) {
-        console.log('o wins');
+        popUp.innerHTML = 'o wins';
+        popUp.classList.remove('hidden');
       } else if (moveCount === 9) {
-        console.log('draw');
+        popUp.innerHTML = 'draw';
+        popUp.classList.remove('hidden');
       }
     });
   }
@@ -89,6 +93,7 @@ const playRound = (() => {
     moveCount = 0;
     makeGameBoard.clearBoard();
     makeGameBoard.newBoard();
+    popUp.classList.add('hidden');
   }
   restartButton.addEventListener('click', restart);
 
