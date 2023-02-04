@@ -41,7 +41,7 @@ const playRound = (() => {
   // indicates current player's turn
   const displayTurnX = document.getElementById('playerX');
   const displayTurnO = document.getElementById('playerO');
-  const restartButton = document.getElementById('restart');
+  const restartButton = document.getElementById('button');
   const popUp = document.getElementById('pop-up');
 
   function displayTurn() {
